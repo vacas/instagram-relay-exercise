@@ -1,7 +1,6 @@
-// import { Environment, Network, RecordSource, Store } from 'relay-runtime';
-const { Environment, Network, RecordSource, Store } = require('relay-runtime');
+import { Environment, Network, RecordSource, Store } from 'relay-runtime';
 
-fetchQuery( operation, variables ) {
+const fetchQuery = (operation, variables) => {
   return fetch('https://api.graph.cool/relay/v1/cjdnel0ho4eyz0113nmup968l', {
     method: 'POST',
     headers: {
@@ -15,7 +14,7 @@ fetchQuery( operation, variables ) {
   }).then(response => {
     return response.json();
   })
-}
+};
 
 const network = Network.create(fetchQuery);
 

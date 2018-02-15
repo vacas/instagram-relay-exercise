@@ -1,4 +1,8 @@
 import React from 'react';
+import {
+  createFragmentContainer,
+  graphql
+} from 'react-relay';
 
 class Post extends React.Component {
   render() {
@@ -27,4 +31,10 @@ class Post extends React.Component {
   }
 }
 
-export default Post;
+export default createFragmentContainer(Post, graphql`
+  fragment Post_post on Post {
+    id
+    description
+    imageUrl
+  }
+`);
