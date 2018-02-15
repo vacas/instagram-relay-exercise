@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import ListPage from './ListPage';
 import {
   QueryRenderer,
   graphql
 } from 'react-relay';
-import environment from './createRelayEnvironment';
+import ListPage from './ListPage';
+import environment from '../createRelayEnvironment';
 
 const AppAllPostQuery = graphql`
   query AppAllPostQuery {

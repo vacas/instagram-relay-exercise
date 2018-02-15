@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash e0e6f209cc1b6beba10b1fb34b6fbee4
+ * @relayHash 30b990a1044e5f191c3a55fda714ae65
  */
 
 /* eslint-disable */
@@ -24,11 +24,14 @@ query AppAllPostQuery {
 }
 
 fragment ListPage_viewer on Viewer {
+  ...Post_viewer
   allPosts(last: 100, orderBy: createdAt_DESC) {
     edges {
       node {
-        ...Post_post
         id
+        description
+        imageUrl
+        ...Post_post
       }
     }
     ... on PostConnection {
@@ -45,6 +48,10 @@ fragment ListPage_viewer on Viewer {
       }
     }
   }
+}
+
+fragment Post_viewer on Viewer {
+  id
 }
 
 fragment Post_post on Post {
@@ -154,24 +161,18 @@ const batch /*: ConcreteBatch*/ = {
                             "storageKey": null
                           },
                           {
-                            "kind": "InlineFragment",
-                            "type": "Post",
-                            "selections": [
-                              {
-                                "kind": "ScalarField",
-                                "alias": null,
-                                "args": null,
-                                "name": "description",
-                                "storageKey": null
-                              },
-                              {
-                                "kind": "ScalarField",
-                                "alias": null,
-                                "args": null,
-                                "name": "imageUrl",
-                                "storageKey": null
-                              }
-                            ]
+                            "kind": "ScalarField",
+                            "alias": null,
+                            "args": null,
+                            "name": "description",
+                            "storageKey": null
+                          },
+                          {
+                            "kind": "ScalarField",
+                            "alias": null,
+                            "args": null,
+                            "name": "imageUrl",
+                            "storageKey": null
                           }
                         ],
                         "storageKey": null
@@ -278,7 +279,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "query AppAllPostQuery {\n  viewer {\n    ...ListPage_viewer\n    id\n  }\n}\n\nfragment ListPage_viewer on Viewer {\n  allPosts(last: 100, orderBy: createdAt_DESC) {\n    edges {\n      node {\n        ...Post_post\n        id\n      }\n    }\n    ... on PostConnection {\n      edges {\n        cursor\n        node {\n          __typename\n          id\n        }\n      }\n      pageInfo {\n        hasPreviousPage\n        startCursor\n      }\n    }\n  }\n}\n\nfragment Post_post on Post {\n  id\n  description\n  imageUrl\n}\n"
+  "text": "query AppAllPostQuery {\n  viewer {\n    ...ListPage_viewer\n    id\n  }\n}\n\nfragment ListPage_viewer on Viewer {\n  ...Post_viewer\n  allPosts(last: 100, orderBy: createdAt_DESC) {\n    edges {\n      node {\n        id\n        description\n        imageUrl\n        ...Post_post\n      }\n    }\n    ... on PostConnection {\n      edges {\n        cursor\n        node {\n          __typename\n          id\n        }\n      }\n      pageInfo {\n        hasPreviousPage\n        startCursor\n      }\n    }\n  }\n}\n\nfragment Post_viewer on Viewer {\n  id\n}\n\nfragment Post_post on Post {\n  id\n  description\n  imageUrl\n}\n"
 };
 
 module.exports = batch;

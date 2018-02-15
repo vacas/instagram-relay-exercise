@@ -1,8 +1,10 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 import {
   createFragmentContainer,
   graphql
 } from 'react-relay';
+import DeletePostMutation from '../mutations/DeletePostMutation';
 
 class Post extends React.Component {
   render() {
@@ -27,14 +29,19 @@ class Post extends React.Component {
   }
 
   _handleDelete = () => {
-
+    DeletePostMutation(this.props.post.id, this.props.viewer.id);
   }
 }
 
-export default createFragmentContainer(Post, graphql`
+const FragmentContainer = createFragmentContainer(Post, graphql`
+  fragment Post_viewer on Viewer {
+    id
+  }
   fragment Post_post on Post {
     id
     description
     imageUrl
   }
 `);
+
+export default withRouter(FragmentContainer);
