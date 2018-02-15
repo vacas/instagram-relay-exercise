@@ -1,4 +1,5 @@
-import { Environment, Network, RecordSource, Store } from 'relay-runtime';
+// import { Environment, Network, RecordSource, Store } from 'relay-runtime';
+const { Environment, Network, RecordSource, Store } = require('relay-runtime');
 
 fetchQuery( operation, variables ) {
   return fetch('https://api.graph.cool/relay/v1/cjdnel0ho4eyz0113nmup968l', {
@@ -24,4 +25,4 @@ const store = new Store(source);
 export default new Environment({
   network,
   store
-})
+});
